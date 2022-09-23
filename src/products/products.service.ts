@@ -9,7 +9,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 
-import { validate as isUUID } from 'uuid';
+import { validate } from 'uuid';
 
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -77,7 +77,7 @@ export class ProductsService {
   async findOne(term: string) {
     let product: Product;
 
-    if (isUUID(term)) {
+    if (validate(term)) {
       product = await this.productRepository.findOneBy({ id: term });
     } else {
       // product = await this.productRepository.findOneBy({ slug: term });
